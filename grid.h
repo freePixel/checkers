@@ -15,7 +15,7 @@ public:
 	grid();
 	void set(int x, int y, piece p);
 	piece get(int x, int y);
-
+	
 	void reset();
 
 private:

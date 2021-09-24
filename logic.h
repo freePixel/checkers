@@ -18,7 +18,15 @@ private:
 	grid* _grid = nullptr;
 	bool is_running = true;
 
-	v2di click = { 0,0 };
+	std::vector<v2di> get_available_moves(int x, int y);
+	void play(v2di origin, v2di dest);
+
+
+	std::array<v2di,2> click; //store last two clicks {last click , new click}
+
+	bool evaluate_click = false;
+	bool selected = false;
+	bool turn_1 = true; // true if it is player 1 turn, false otherwise
 
 };
 
