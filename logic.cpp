@@ -73,7 +73,7 @@ void logic::play(v2di origin, v2di dest)
 	}
 	selected = false;
 	graph->set_highlight(std::vector<v2di>());
-	std::cout << "unselected \n";
+	
 }
 
 void logic::handle_logic()
@@ -87,7 +87,6 @@ void logic::handle_logic()
 		}
 		
 		else {
-			std::cout << "selected \n";
 			std::vector<v2di> p = get_available_moves(click[1].x, click[1].y);
 			graph->set_highlight(p);
 			selected = true;
@@ -155,6 +154,96 @@ std::vector<v2di> logic::get_available_moves(int x, int y) //return availables m
 					if (x <= 5 && y <= 5 && _grid->get(x + 2, y + 2) == piece::NONE && (_grid->get(x + 1, y + 1) == piece::RED || _grid->get(x + 1, y + 1) == piece::DOUBLE_RED))
 					{
 						available.push_back({ x + 2,y + 2 });
+					}
+				}
+			}
+		}
+		break;
+	case piece::DOUBLE_WHITE:
+		if (turn_1 == false)
+		{
+			if (x >= 1 && y <= 6) // left move
+			{
+				if (_grid->get(x - 1, y + 1) == piece::NONE) available.push_back({ x - 1,y + 1 });
+				else {
+					if (x >= 2 && y <= 5 && _grid->get(x - 2, y + 2) == piece::NONE && (_grid->get(x - 1, y + 1) == piece::RED || _grid->get(x - 1, y + 1) == piece::DOUBLE_RED))
+					{
+						available.push_back({ x - 2,y + 2 });
+					}
+				}
+			}
+			if (x <= 6 && y <= 6) //right move
+			{
+				if (_grid->get(x + 1, y + 1) == piece::NONE) available.push_back({ x + 1,y + 1 });
+				else {
+					if (x <= 5 && y <= 5 && _grid->get(x + 2, y + 2) == piece::NONE && (_grid->get(x + 1, y + 1) == piece::RED || _grid->get(x + 1, y + 1) == piece::DOUBLE_RED))
+					{
+						available.push_back({ x + 2,y + 2 });
+					}
+				}
+			}
+			if (x >= 1 && y >= 1) // left move
+			{
+				if (_grid->get(x - 1, y - 1) == piece::NONE) available.push_back({ x - 1,y - 1 });
+				else {
+					if (x >= 2 && y >= 2 && _grid->get(x - 2, y - 2) == piece::NONE && (_grid->get(x - 1, y - 1) == piece::RED || _grid->get(x - 1, y - 1) == piece::DOUBLE_RED))
+					{
+						available.push_back({ x - 2,y - 2 });
+					}
+				}
+			}
+			if (x <= 6 && y >= 1) //right move
+			{
+				if (_grid->get(x + 1, y - 1) == piece::NONE) available.push_back({ x + 1,y - 1 });
+				else {
+					if (x <= 5 && y >= 2 && _grid->get(x + 2, y - 2) == piece::NONE && (_grid->get(x + 1, y - 1) == piece::RED || _grid->get(x + 1, y - 1) == piece::DOUBLE_RED))
+					{
+						available.push_back({ x + 2,y - 2 });
+					}
+				}
+			}
+		}
+		break;
+	case piece::DOUBLE_RED:
+		if (turn_1 == true)
+		{
+			if (x >= 1 && y <= 6) // left move
+			{
+				if (_grid->get(x - 1, y + 1) == piece::NONE) available.push_back({ x - 1,y + 1 });
+				else {
+					if (x >= 2 && y <= 5 && _grid->get(x - 2, y + 2) == piece::NONE && (_grid->get(x - 1, y + 1) == piece::WHITE || _grid->get(x - 1, y + 1) == piece::DOUBLE_WHITE))
+					{
+						available.push_back({ x - 2,y + 2 });
+					}
+				}
+			}
+			if (x <= 6 && y <= 6) //right move
+			{
+				if (_grid->get(x + 1, y + 1) == piece::NONE) available.push_back({ x + 1,y + 1 });
+				else {
+					if (x <= 5 && y <= 5 && _grid->get(x + 2, y + 2) == piece::NONE && (_grid->get(x + 1, y + 1) == piece::WHITE || _grid->get(x + 1, y + 1) == piece::DOUBLE_WHITE))
+					{
+						available.push_back({ x + 2,y + 2 });
+					}
+				}
+			}
+			if (x >= 1 && y >= 1) // left move
+			{
+				if (_grid->get(x - 1, y - 1) == piece::NONE) available.push_back({ x - 1,y - 1 });
+				else {
+					if (x >= 2 && y >= 2 && _grid->get(x - 2, y - 2) == piece::NONE && (_grid->get(x - 1, y - 1) == piece::WHITE || _grid->get(x - 1, y - 1) == piece::DOUBLE_WHITE))
+					{
+						available.push_back({ x - 2,y - 2 });
+					}
+				}
+			}
+			if (x <= 6 && y >= 1) //right move
+			{
+				if (_grid->get(x + 1, y - 1) == piece::NONE) available.push_back({ x + 1,y - 1 });
+				else {
+					if (x <= 5 && y >= 2 && _grid->get(x + 2, y - 2) == piece::NONE && (_grid->get(x + 1, y - 1) == piece::WHITE || _grid->get(x + 1, y - 1) == piece::DOUBLE_WHITE))
+					{
+						available.push_back({ x + 2,y - 2 });
 					}
 				}
 			}
